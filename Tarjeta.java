@@ -119,5 +119,32 @@ public class Tarjeta extends JButton{
 		this.revelado = revelado;
 	}
 	
-	
+	// Se encarga de mostrar la imagen del boton (1) o ocultarla (0)
+		public void mostrarOcultarImg(int tipoOperacion){
+			// Con uso de un hilo, se crea un efecto para mostrar o cultar la imagen
+			Thread hilo = new Thread(){
+	            public synchronized void run(){
+	                try {
+	                	int aux = 0;
+	                	switch (tipoOperacion) {
+	                	// Si las imagenes no son iguales, espera un momento para que el usuario las veas
+	                	// luego las oculta
+	                    case 0: sleep(500); aux = 92; break;
+	                    case 1: aux = 0; break;
+	                    default: break;             
+	                	}
+	                	for(int i=1;i<92;i+=5){
+	                		ImageIcon img = new ImageIcon(getClass().getResource("/Imagenes/"+tema+tipo+".png"));
+	                		img = new ImageIcon((img.getImage()).getScaledInstance(Math.abs(aux-i), 91, java.awt.Image.SCALE_SMOOTH));
+	                		setIcon(img);
+	                		sleep(5);
+	                	}
+	                	if(tipoOperacion==0){
+	                		setIcon(null);}
+	                	}catch (InterruptedException ex){
+	                		ex.printStackTrace();
+	                	}
+	            }
+			};hilo.start();
+		}
 }
