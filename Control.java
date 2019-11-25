@@ -47,8 +47,14 @@ public class Control {
 		fichas=FILAS*COLUMNAS;
 		Tarjetas= new Tarjeta[FILAS*COLUMNAS];
 		azar = new Random();
+		number= new Vector<String>();
 		prepararRandom();
 		
+	}
+	
+	void setMatriz(int a, int b) {
+		FILAS = a;
+		COLUMNAS = b;
 	}
 	// LLena el vector "number" con parejas del 1 a 15
 	void prepararRandom() {
@@ -137,15 +143,15 @@ public class Control {
 			return gano;
 		}
 		
-		// Efecto para desbloquear los botones una vez terminado el juego.
-		public void desbloquearBotones(Tarjeta[] boton){
+		// Efecto para desbloquear las Tarjetas una vez terminado el juego.
+		public void desbloquearBotones(Tarjeta[] Tarjeta){
 			// Se utiliza un Hilo para el efecto
 			Thread hilo = new Thread(){
 	            public synchronized void run(){
 	                try {
 	                	sleep(900);
 	                	for(int i=(FILAS*COLUMNAS)-1;i>-1;i--){
-	                		boton[i].setEnabled(true);
+	                		Tarjeta[i].setEnabled(true);
 	                		sleep(30);
 	                	}
 	                } catch (InterruptedException ex) {
@@ -155,15 +161,15 @@ public class Control {
 			};hilo.start();
 		}
 		
-		// Si continua jugando, se resetea las botones, se prepara otro ramdon y setean variables
-		public void seguirJugando(Tarjeta[] botones){		
+		// Si continua jugando, se resetea las Tarjetas, se prepara otro ramdon y setean variables
+		public void seguirJugando(Tarjeta[] Tarjetas){		
 			prepararRandom();
 			fichas = FILAS*COLUMNAS;
 			contador = 0;
 			cambio = 0;
 			for(int i=0;i<FILAS*COLUMNAS;i++){
-				//botones[i].setEnabled(true);
-				botones[i].setNumero(ramdonNumero());
+				//Tarjetas[i].setEnabled(true);
+				Tarjetas[i].setNumero(ramdonNumero());
 			}			
 		}
 		

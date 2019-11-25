@@ -1,68 +1,59 @@
-import java.awt.Color;
 import java.awt.Container;
-import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+@SuppressWarnings("serial")
 public class GUIMemoryCards extends JFrame {
-	Control activar;
-	private static int columnas = 1;
-	private static int filas = 2;
-	private String tema;
-	private JButton tema1, tema2;
-	private JFrame frame = new JFrame();
+	
+	private JButton tarjeta;
 	private ImageIcon imagen;
+	private String temaElegido,nivelElegido;
+	private int filas = 0, columnas = 0;
+	private String[] niveles = {"nivel 1", "nivel 2"},temas = {"Yugi","Magic"};
+	Control juego;
 	private Escucha escucha;
 	
 	public GUIMemoryCards() {
-		initGUI();
-		this.setTitle("Memory Cards");
-		this.setSize(300, 70);
-		this.setUndecorated(false);
-		this.setBackground(Color.BLACK);
-		//this.pack();
+		escucha = new Escucha();
+		juego = new Control();
+		GUITema();
+		this.setTitle("Reta a tu memoria");
+		this.pack();
+		this.setSize(210*filas, 320*columnas);
+		this.setResizable(false);
 		this.setLocationRelativeTo(null);
-		this.setResizable(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-   	 	setVisible(true);
-	}
-	private void initGUI() {
-		
+		this.setVisible(true);
+	}	
+	
+	private void GUITema() {
+		temaElegido = (String)JOptionPane.showInputDialog(null,"bienvenido, selecciona el tema que deseas jugar","Tema",JOptionPane.QUESTION_MESSAGE,null,temas,temas[0]);
+		nivelElegido = (String)JOptionPane.showInputDialog(null, "has elegido jugar "+temaElegido, "Nivel", JOptionPane.UNDEFINED_CONDITION, null, niveles, niveles[0]);
+		if(nivelElegido == "nivel 1") {
+			filas = 3;
+			columnas = 4;
+			juego.setMatriz(3, 4);
+			}else if(nivelElegido == "nivel 2") {
+				filas = 4;
+				columnas = 5;
+				juego.setMatriz(4, 5);
+			}
 		Container contenedor = this.getContentPane();
-		contenedor.setLayout(new GridLayout(columnas, filas));
-		frame.getContentPane().setLayout(null);
-		tema1 = new JButton("Tema 1");
-		tema1.addActionListener(escucha);
-		tema1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		tema1.setVisible(true);
-		
-		contenedor.add(tema1);
-		tema1.addActionListener(escucha);
-		
-		tema2 = new JButton("Tema 2");
-		tema2.addActionListener(escucha);
-		tema2.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		tema2.setVisible(true);
-		
-		contenedor.add(tema2);
-		tema2.addActionListener(escucha);
-		
+		contenedor.setLayout(new GridLayout(filas,columnas));
+		juego.iniciarJuego();
+		juego.crearTarjetas();
 	}
-	private class Escucha extends MouseAdapter implements ActionListener{
+	public class Escucha implements ActionListener {
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(ActionEvent event) {
 			// TODO Auto-generated method stub
-			if(e.getSource() == tema1) {
-				
-			}else if(e.getSource() == tema2) {
-				
-			}
-		}
-		
-	}	
+			
+		}}
 }

@@ -6,16 +6,14 @@
  * Taller # 1 -Juego Memory Cards
  */
 import java.awt.Color;
-import java.awt.Dimension;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class Tarjetas.
  */
+@SuppressWarnings("serial")
 public class Tarjeta extends JButton{
 	
 	/** The Caratula. */
@@ -100,24 +98,8 @@ public class Tarjeta extends JButton{
 			ImageIcon img = new ImageIcon(getClass().getResource("/Imagenes/"+tema+tipo+".png"));
 			setIcon(img);
 		}
-	
-	/**
-	 * Checks if is revelado.
-	 *
-	 * @return true, if is revelado
-	 */
-	public boolean isRevelado() {
-		return revelado;
-	}
-	
-	/**
-	 * Sets the revelado.
-	 *
-	 * @param revelado the new revelado
-	 */
-	public void setRevelado(boolean revelado) {
-		this.revelado = revelado;
-	}
+
+
 	
 	// Se encarga de mostrar la imagen del boton (1) o ocultarla (0)
 		public void mostrarOcultarImg(int tipoOperacion){
