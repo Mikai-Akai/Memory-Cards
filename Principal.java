@@ -1,7 +1,3 @@
-import java.awt.EventQueue;
-
-import javax.swing.UIManager;
-
 /*
  * Programación Interactiva
  * Equipo de trabajo:
@@ -9,8 +5,21 @@ import javax.swing.UIManager;
  * -Mateo Obando Gutierrez 1844983-3743
  * Taller # 1 -Juego Memory Cards
  */
+import java.awt.EventQueue;
+
+import javax.swing.UIManager;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Principal.
+ */
 public class Principal {
 
+	/**
+	 * The main method.
+	 *solicita la creacion y activacion de la interfaz grafica
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
@@ -22,6 +31,7 @@ public class Principal {
 		}
 			EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				@SuppressWarnings("unused")
 				GUIMemoryCards vista = new GUIMemoryCards();
 				}
 			});	
